@@ -8,6 +8,9 @@ import {ReactWidget, } from '@jupyterlab/apputils'
 
 import {Panel} from '@phosphor/widgets'
 
+import Tabs from './Tabs'
+import Tab from './Tab'
+
 
 /**
  * Initialization data for the sagemaker-ext extension.
@@ -43,9 +46,14 @@ function ExampleComponent() {
   return(
     <body id='main'>
       <div className='jp-Examplewidget'><h2>SDocker</h2></div>
+      <Tabs>
+        <Tab title="Hosts"><table><DockerHostRow instancetype="p3.2xlarge" /></table></Tab>
+        <Tab title='Images'>Nothing here yet</Tab>
+        <Tab title="Containers">No content yet</Tab>
+      </Tabs>
       <div>
         <h3>Instance Types:</h3>
-          <ul><DockerHostRow instancetype="p3.2xlarge" /></ul>
+          
       </div>
 
     </body>
@@ -54,14 +62,14 @@ function ExampleComponent() {
 
 function DockerHostRow(props: any) {
   return(
-    <li>
+    <tr>
       <span className='info'>
         <span>Instance Type: {props.instancetype}</span>
       </span>
       <span>
         <button>Off</button>
       </span>
-    </li>
+    </tr>
 
   )
 }
