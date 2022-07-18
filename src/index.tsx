@@ -11,6 +11,8 @@ import {Panel} from '@phosphor/widgets'
 import Tabs from './Tabs'
 import Tab from './Tab'
 
+import { exec } from "child_process";
+
 
 /**
  * Initialization data for the sagemaker-ext extension.
@@ -37,26 +39,42 @@ export class SDockerWidget extends ReactWidget {
   _label:string;
   render(): JSX.Element {
     return (
-        <ExampleComponent />
+        <MainComponent />
     );
   }
 }
 
-function ExampleComponent() {
+function MainComponent() {
   return(
     <body id='main'>
-      <div className='jp-Examplewidget'><h2>SDocker</h2></div>
+      <div className='jp-Mainwidget'><h2>SDocker</h2></div>
       <Tabs>
-        <Tab title="Hosts"><table><DockerHostRow instancetype="p3.2xlarge" /></table></Tab>
+        <Tab title="Hosts"> <HostsComponent /> </Tab>
         <Tab title='Images'>Nothing here yet</Tab>
         <Tab title="Containers">No content yet</Tab>
       </Tabs>
-      <div>
-        <h3>Instance Types:</h3>
-          
-      </div>
 
     </body>
+  )
+}
+
+function HostsComponent() {
+  /**
+   * This needs to get all Hosts and then show them in a list.
+   * 
+   */
+
+
+  return(
+    <table>
+      <tbody>
+
+
+        <DockerHostRow instancetype='p3.2xlarge' />
+
+      </tbody>
+    </table>
+
   )
 }
 
