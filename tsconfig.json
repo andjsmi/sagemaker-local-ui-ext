@@ -18,8 +18,12 @@
     "strict": true,
     "strictNullChecks": false,
     "target": "es2017",
-    "types": [],
-    "allowJs": true
+    "types": ["node"],
+    "allowJs": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ]
   },
   "include": ["src/*"]
+  
 }
