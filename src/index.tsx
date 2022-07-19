@@ -11,7 +11,10 @@ import {Panel} from '@phosphor/widgets'
 import Tabs from './Tabs'
 import Tab from './Tab'
 
+
 //import {exec} from 'child_process'
+
+import Menu from './components/Menu'
 
 
 /**
@@ -65,8 +68,8 @@ function HostsComponent() {
    */
 
   const instances = [
-    ['p3.2xlarge', 'i-23123123', 'active'],
-    ['m5.4xlarge', 'i-abcd', 'not-active']
+    ['p3.2xlarge', 'i-23123123', 'active-host'],
+    ['m5.4xlarge', 'i-abcd', 'not-active-host']
   ]
 
 
@@ -76,31 +79,72 @@ function HostsComponent() {
         <DockerHostRow instancetype={item[0]} instanceid={item[1]} contextstatus={item[2]} />
       )
     }</>
-    // <table>
-    //   <tbody>
-
-
-        // instances.map((item, i) => <DockerHostRow instancetype={item[0]} instanceid={item[1]})
-        // <DockerHostRow instancetype='p3.2xlarge' instanceid="i-0123123123213"/>
-
-      /* </tbody>
-    </table> */
-
   )
 }
 
-function Dropdown(props: any){
+function CreateHost(props: any) {
+
+  // const instanceTypes = [
+  //   {key: "p3.xlarge", value: 'p3.xlarge', text: "p3.xlarge"},
+  //   {key: "m5.xlarge", value: "m5.xlarge", text: "m5.xlarge"}
+  // ]
   return(
-    <label>
-      {props.label}
-      <select value={props.value} onChange={props.onChange}>
-        {props.options.map( (option: { value: string | number | string[]; }) => (
-          <option value={option.value}>option.label</option>
-        ))}
-      </select>
-    </label>
+    <Menu />
+    // <Dropdown
+    //   placeholder='Select Instance Type'
+    //   fluid
+    //   search
+    //   selection
+    //   options={instanceTypes}
+    //   />
   )
 }
+
+// function DropdownItems(props: any) {
+//   return(
+//     <>
+//     {
+//       props.instancetypes.map( (instancetype: String, i: any) =>
+
+
+//       <a>{instancetype}</a>
+//       )
+//     }
+//     </>
+//   )
+// }
+
+// function Dropdown(props: any) {
+//   const onDropdownClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+//     document.getElementById("thedropdown").classList.toggle("show")
+//   }
+
+
+
+  // return(
+  //     <div className='dropdown'>
+  //     <button onClick={onDropdownClick} className='dropbutton'>Select Instance Type</button>
+  //     <div id='thedropdown'>
+  //       <DropdownItems instancetypes={props.instancetypes} />
+  //     </div>
+  //   </div>
+      
+    
+//   )
+// }
+
+// function Dropdown(props: any){
+//   return(
+//     <label>
+//       {props.label}
+//       <select value={props.value} onChange={props.onChange}>
+//         {props.options.map( (option: { value: string | number | string[]; }) => (
+//           <option value={option.value}>option.label</option>
+//         ))}
+//       </select>
+//     </label>
+//   )
+// }
 
 function DockerHostRow(props: any) {
   const pauseButtonClickHandler = (event: React.MouseEvent<HTMLButtonElement>, instanceID: String) => {
