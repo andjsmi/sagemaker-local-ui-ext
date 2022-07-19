@@ -68,15 +68,15 @@ function HostsComponent() {
    */
 
   const instances = [
-    ['p3.2xlarge', 'i-23123123', 'active-host'],
-    ['m5.4xlarge', 'i-abcd', 'not-active-host']
+    ['p3.2xlarge', 'i-23123123', 'active-host', "Running"],
+    ['m5.4xlarge', 'i-abcd', 'not-active-host', "Terminating"]
   ]
 
 
   return(
     <> {
       instances.map( (item: Array<String>, i) =>
-        <DockerHostRow instancetype={item[0]} instanceid={item[1]} contextstatus={item[2]} />
+        <DockerHostRow instancetype={item[0]} instanceid={item[1]} contextstatus={item[2]} state={item[3]}/>
       )
     }</>
   )
@@ -84,67 +84,16 @@ function HostsComponent() {
 
 function CreateHost(props: any) {
 
-  // const instanceTypes = [
-  //   {key: "p3.xlarge", value: 'p3.xlarge', text: "p3.xlarge"},
-  //   {key: "m5.xlarge", value: "m5.xlarge", text: "m5.xlarge"}
-  // ]
   return(
     <Menu />
-    // <Dropdown
-    //   placeholder='Select Instance Type'
-    //   fluid
-    //   search
-    //   selection
-    //   options={instanceTypes}
-    //   />
+
   )
 }
 
-// function DropdownItems(props: any) {
-//   return(
-//     <>
-//     {
-//       props.instancetypes.map( (instancetype: String, i: any) =>
-
-
-//       <a>{instancetype}</a>
-//       )
-//     }
-//     </>
-//   )
-// }
-
-// function Dropdown(props: any) {
-//   const onDropdownClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-//     document.getElementById("thedropdown").classList.toggle("show")
-//   }
 
 
 
-  // return(
-  //     <div className='dropdown'>
-  //     <button onClick={onDropdownClick} className='dropbutton'>Select Instance Type</button>
-  //     <div id='thedropdown'>
-  //       <DropdownItems instancetypes={props.instancetypes} />
-  //     </div>
-  //   </div>
-      
-    
-//   )
-// }
 
-// function Dropdown(props: any){
-//   return(
-//     <label>
-//       {props.label}
-//       <select value={props.value} onChange={props.onChange}>
-//         {props.options.map( (option: { value: string | number | string[]; }) => (
-//           <option value={option.value}>option.label</option>
-//         ))}
-//       </select>
-//     </label>
-//   )
-// }
 
 function DockerHostRow(props: any) {
   const pauseButtonClickHandler = (event: React.MouseEvent<HTMLButtonElement>, instanceID: String) => {
@@ -164,7 +113,7 @@ function DockerHostRow(props: any) {
       </span>
       <span>
         <span className={props.contextstatus}></span>
-        <span className="State">Running</span>
+        <span className="State">props.state</span>
         <button onClick={event=> pauseButtonClickHandler(event, props.instanceid)}>II</button>
         <button onClick={event => stopButtonClickHandler(event, props.instanceid)}>X</button>
       </span>
