@@ -3,3 +3,27 @@
 li {
     display: inline;
 }
+
+.isCurrentContext {
+    height:10px;
+    width: 10px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.active {
+    background-color: green;
+    height:10px;
+    width: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.not-active {
+    background-color: black;
+    height:10px;
+    width: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
