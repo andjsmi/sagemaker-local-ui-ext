@@ -11,10 +11,14 @@ import {Panel} from '@phosphor/widgets'
 import Tabs from './Tabs'
 import Tab from './Tab'
 
+import { requestAPIServer } from './RequestAPI';
 
-//import {exec} from 'child_process'
+
+// import {exec} from 'child_process'
 
 import Menu from './components/Menu'
+
+let active_instance_id: any = null
 
 
 /**
@@ -53,24 +57,94 @@ function MainComponent() {
       <div className='jp-Mainwidget'><h2>SDocker</h2></div>
       <Tabs>
         <Tab title="Hosts"> <CreateHost /> <table><tbody><HostsComponent /></tbody></table> </Tab>
-        <Tab title='Images'>Nothing here yet</Tab>
-        <Tab title="Containers">No content yet</Tab>
+        <Tab title='Images'><ImagesComponent instance_id={active_instance_id} /></Tab>
+        <Tab title="Containers"><ContainersComponent instance_id={active_instance_id} /></Tab>
       </Tabs>
 
     </body>
   )
 }
 
+function ImagesComponent(props: any) {
+  const dataToSend={
+    "instance_id": props.instance_id
+  }
+  if (props.instance_id !== null) {
+    try {
+      const reply = requestAPIServer("images", {
+        method: "POST",
+        body: JSON.stringify(dataToSend)
+      })
+      console.log(reply)
+      return (
+        <div>Getting images</div>
+      )
+    }
+    catch (reason) {
+      console.error(`Error on POST /docker-host/images.\n${reason}`)
+      return(
+        <div>Could not get images</div>
+      )
+    }
+  } else {
+    return(
+      <div>Did not have instance assigned as active</div>
+    )
+  }
+}
+
+function ContainersComponent(props: any) {
+  const dataToSend={
+    "instance_id": props.instance_id
+  }
+  if (props.instance_id !== null) {
+    try {
+      const reply = requestAPIServer("containers", {
+        method: "POST",
+        body: JSON.stringify(dataToSend)
+      })
+      console.log(reply)
+      return (
+        <div>Getting images</div>
+      )
+    }
+    catch (reason) {
+      console.error(`Error on POST /docker-host/containers.\n${reason}`)
+      return(
+        <div>Could not get images</div>
+      )
+    }
+  } else {
+    return(
+      <div>Did not have instance assigned as active</div>
+    )
+  }
+}
+
 function HostsComponent() {
   /**
    * This needs to get all Hosts and then show them in a list.
    * 
+   * 
    */
+
+
+  try {
+    const reply = requestAPIServer("contexts", {
+      method: "GET"
+    })
+    console.log(reply)
+  }
+  catch (reason) {
+    console.error(`Error on GET /docker-host/contexts.\n${reason}`)
+  }
+  
 
   const instances = [
     ['p3.2xlarge', 'i-23123123', 'active-host', "Running"],
     ['m5.4xlarge', 'i-abcd', 'not-active-host', "Terminating"]
   ]
+  active_instance_id = 'i-23123123'
 
 
   return(
@@ -96,14 +170,28 @@ function CreateHost(props: any) {
 
 
 function DockerHostRow(props: any) {
-  const pauseButtonClickHandler = (event: React.MouseEvent<HTMLButtonElement>, instanceID: String) => {
-    //console.log(event)
-    console.log("Stopping EC2 instance with ID ", instanceID)
-  }
+  // const pauseButtonClickHandler = (event: React.MouseEvent<HTMLButtonElement>, instanceID: String) => {
+  //   console.log("Stopping EC2 instance with ID ", instanceID)
+  // }
 
   const stopButtonClickHandler = (event: React.MouseEvent<HTMLButtonElement>, instanceID: String) => {
     //console.log(event)
     console.log("Terminating EC2 instance with ID ", instanceID)
+
+    const dataToSend = {
+      "instance_id": instanceID
+    }
+    try {
+      const reply = requestAPIServer("contexts", {
+        method: "POST",
+        body: JSON.stringify(dataToSend)
+      })
+      console.log(reply)
+    }
+    catch (reason) {
+      console.error(`Error on POST /docker-host/terminate_host.\n${reason}`)
+    }
+
   }
   
   return(
@@ -113,8 +201,8 @@ function DockerHostRow(props: any) {
       </span>
       <span>
         <span className={props.contextstatus}></span>
-        <span className="State">props.state</span>
-        <button onClick={event=> pauseButtonClickHandler(event, props.instanceid)}>II</button>
+        <span className="State">{props.state}</span>
+        {/* <button onClick={event=> pauseButtonClickHandler(event, props.instanceid)}>II</button> */}
         <button onClick={event => stopButtonClickHandler(event, props.instanceid)}>X</button>
       </span>
     </tr>
