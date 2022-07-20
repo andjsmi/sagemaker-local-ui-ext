@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import Dropdown from './Dropdown'
 
+import { requestAPIServer } from '../RequestAPI';
+
 const Menu: React.FC = (): JSX.Element => {
     const [showDropdown, setShowDropdown] = useState<boolean>(false);
     const [selectInstanceType, setInstanceType] = useState<string>("");
@@ -26,12 +28,34 @@ const Menu: React.FC = (): JSX.Element => {
         }
     }
 
+    /**
+     * Creates an instance by calling JupyterServer extension
+     * 
+     * @param instanceType Instance type to be created
+     */
+    function createInstance(instanceType: String) {
+        console.log("Creating instance with type ", instanceType)
+        const dataToSend = {
+            "instance_type": instanceType
+        }
+        try {
+            const reply = requestAPIServer('create_host', {
+                body: JSON.stringify(dataToSend),
+                method: 'POST'
+            });
+            console.log(reply);
+        }
+        catch (reason) {
+            console.error(`Error on POST /docker-host/create_host ${dataToSend}.\n${reason}`);
+        }
+    }
+
     function StartDockerHost(props: any) {
 
         const startButtonClickHandler = (event: React.MouseEvent<HTMLButtonElement>, instanceType: String) => {
             //console.log(event)
             {instanceType
-                ? console.log("Creating instance with type ", instanceType)
+                ?  createInstance(instanceType)
                 : console.log("Instance type has not been selected yet")
             }
             
