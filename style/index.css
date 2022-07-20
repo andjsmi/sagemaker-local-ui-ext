@@ -52,3 +52,11 @@ li {
   .dropdown > p:last-child {
     border-bottom: 0 none;
   }
+
+.sdocker {
+  background-color: rgb(45, 57, 73);
+}
+
+.sdocker div {
+  background-color: rgb(45, 57, 73);
+}
