@@ -14,7 +14,7 @@ This creates a new element in the sidebar that allows a user to create, terminat
 ## Install
 
 ```bash
-jupyter labextension install sagemaker-ext
+jupyter labextension install sagemaker-ext --minimize=False
 ```
 
 ## Contributing
