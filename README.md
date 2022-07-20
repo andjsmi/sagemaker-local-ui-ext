@@ -2,7 +2,9 @@
 
 ![Github Actions Status](https://github.com/my_name/myextension/workflows/Build/badge.svg)
 
-A JupyterLab extension.
+A JupyterLab extension for SageMaker Studio to implement a visual interface for using local mode. This also requires the [sdocker](https://github.com/samdwar1976/sdocker) package and the JupyterServer extension located [here]().
+
+This creates a new element in the sidebar that allows a user to create, terminate and view the current Docker hosts for executing Docker commands from the Studio UI.
 
 
 ## Requirements
