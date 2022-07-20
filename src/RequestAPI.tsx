@@ -17,7 +17,7 @@ export async function requestAPIServer(endpoint = '', init={}) {
     try{
         response = await ServerConnection.makeRequest(requestUrl, init, settings);
     }
-    catch(error: any) {
+    catch(error) {
         throw new ServerConnection.NetworkError(error);
     }
     const data = await response.json()
