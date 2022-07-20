@@ -37,7 +37,7 @@ const extension: JupyterFrontEndPlugin<void> = {
 function addSidebar(app: any) {
   const panel = new Panel();
   panel.id = "SDocker";
-  panel.title.icon = "AA"
+  panel.title.iconClass = "AAAA"
   panel.addWidget(new SDockerWidget());
   app.shell.add(panel, 'left')
 }
