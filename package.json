@@ -1,5 +1,5 @@
 {
-  "name": "sagemaker-ext",
+  "name": "sdocker-ui",
   "version": "0.1.2",
   "description": "A JupyterLab extension.",
   "keywords": [
@@ -7,9 +7,9 @@
     "jupyterlab",
     "jupyterlab-extension"
   ],
-  "homepage": "https://github.com/my_name/myextension",
+  "homepage": "https://github.com/andjsmi/sdocker-ui",
   "bugs": {
-    "url": "https://github.com/my_name/myextension/issues"
+    "url": "https://github.com/andjsmi/sdocker-ui/issues"
   },
   "license": "BSD-3-Clause",
   "author": "Andrew",
@@ -22,7 +22,7 @@
   "style": "style/index.css",
   "repository": {
     "type": "git",
-    "url": "https://github.com/my_name/myextension.git"
+    "url": "https://github.com/andjsmi/sdocker-ui.git"
   },
   "scripts": {
     "build": "tsc",

@@ -1,8 +1,8 @@
-# sagemaker-ext
+# sdocker-ui
 
 ![Github Actions Status](https://github.com/my_name/myextension/workflows/Build/badge.svg)
 
-A JupyterLab extension for SageMaker Studio to implement a visual interface for using local mode. This also requires the [sdocker](https://github.com/samdwar1976/sdocker) package and the JupyterServer extension located [here]().
+A JupyterLab extension for SageMaker Studio to implement a visual interface for using local mode. This also requires the [sdocker](https://github.com/samdwar1976/sdocker) package and the [sdocker-server](https://github.com/samdwar1976/sdocker-server) extension.
 
 This creates a new element in the sidebar that allows a user to create, terminate and view the current Docker hosts for executing Docker commands from the Studio UI.
 
@@ -14,7 +14,11 @@ This creates a new element in the sidebar that allows a user to create, terminat
 ## Install
 
 ```bash
-jupyter labextension install sagemaker-ext --minimize=False
+git clone http://github.com/andjsmi/sdocker-ui
+cd sdocker-ui
+
+jupyter labextension install . --minimize=False
+nohup supervisorctl -c /etc/supervisor/conf.d/supervisord.conf restart jupyterlabserver
 ```
 
 ## Contributing
